@@ -2,12 +2,13 @@
 // Top banner with rotating announcements, flash sale countdown, and marquee
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Truck, ShieldCheck, Apple, Phone } from 'lucide-react';
 
 const messages = [
-  '🚚 FREE Delivery across Maharashtra on bulk orders!',
-  '🏥 Government Approved Hi-Tech Nursery — Quality Guaranteed',
-  '🥭 New Season: Alphonso & Kesar Mango Saplings Available Now!',
-  '📞 Call 8999539204 or 7058151143 for Wholesale Enquiries',
+  { icon: <Truck size={14} className="inline-block mr-1" />, text: 'FREE Delivery across Maharashtra on bulk orders!' },
+  { icon: <ShieldCheck size={14} className="inline-block mr-1" />, text: 'Government Approved Hi-Tech Nursery — Quality Guaranteed' },
+  { icon: <Apple size={14} className="inline-block mr-1" />, text: 'New Season: Alphonso & Kesar Mango Saplings Available Now!' },
+  { icon: <Phone size={14} className="inline-block mr-1" />, text: 'Call 8999539204 or 7058151143 for Wholesale Enquiries' },
 ];
 
 const AnnouncementBar = () => {
@@ -31,9 +32,9 @@ const AnnouncementBar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="font-medium tracking-wide"
+            className="font-medium tracking-wide flex items-center justify-center gap-1"
           >
-            {messages[index]}
+            {messages[index].icon} {messages[index].text}
           </motion.p>
         </AnimatePresence>
       </div>

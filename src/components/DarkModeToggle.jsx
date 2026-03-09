@@ -1,6 +1,7 @@
 // components/DarkModeToggle.jsx
 // Dark / Light mode toggle button
 import { motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
 
 const DarkModeToggle = ({ dark, setDark }) => {
   return (
@@ -16,7 +17,7 @@ const DarkModeToggle = ({ dark, setDark }) => {
         }`}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       >
-        {dark ? '🌙' : '☀️'}
+        {dark ? <Moon size={12} className="text-white" /> : <Sun size={12} className="text-white" />}
       </motion.div>
     </button>
   );

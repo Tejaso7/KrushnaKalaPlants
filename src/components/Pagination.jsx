@@ -1,6 +1,7 @@
 // components/Pagination.jsx
 // Pagination UI component
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
@@ -15,9 +16,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 rounded-xl text-sm font-medium bg-bg-card shadow-md hover:bg-primary hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-4 py-2 rounded-xl text-sm font-medium bg-bg-card shadow-md hover:bg-primary hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1"
       >
-        ← Prev
+        <ChevronLeft size={16} /> Prev
       </button>
       {pages.map((page) => (
         <motion.button
@@ -36,9 +37,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 rounded-xl text-sm font-medium bg-bg-card shadow-md hover:bg-primary hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-4 py-2 rounded-xl text-sm font-medium bg-bg-card shadow-md hover:bg-primary hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1"
       >
-        Next →
+        Next <ChevronRight size={16} />
       </button>
     </div>
   );

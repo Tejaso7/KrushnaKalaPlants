@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Sprout } from 'lucide-react';
 
 const RecentlyViewed = () => {
   const [items, setItems] = useState([]);
@@ -33,7 +34,7 @@ const RecentlyViewed = () => {
                 {item.image ? (
                   <img src={item.image} alt={item.name} className="object-cover h-full w-full" />
                 ) : (
-                  <span className="text-4xl">🌱</span>
+                  <Sprout size={32} className="text-primary" />
                 )}
               </div>
               <div className="p-3">

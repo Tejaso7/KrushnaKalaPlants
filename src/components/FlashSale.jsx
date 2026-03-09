@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Zap, ArrowRight } from 'lucide-react';
 
 // Countdown target: 24 hours from now (resets daily)
 const getTargetTime = () => {
@@ -42,7 +43,9 @@ const FlashSale = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-2">⚡ Flash Sale</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-2 flex items-center justify-center gap-3">
+            <Zap size={36} className="text-white" /> Flash Sale
+          </h2>
           <p className="text-lg opacity-90 mb-6">Hurry! Deals end today</p>
 
           {/* Countdown */}
@@ -61,9 +64,9 @@ const FlashSale = () => {
 
           <Link
             to="/products"
-            className="inline-block bg-white text-badge-sale font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all duration-300 shadow-xl hover:scale-105"
+            className="inline-flex items-center gap-2 bg-white text-badge-sale font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all duration-300 shadow-xl hover:scale-105"
           >
-            Shop Flash Sale →
+            Shop Flash Sale <ArrowRight size={18} />
           </Link>
         </motion.div>
       </div>

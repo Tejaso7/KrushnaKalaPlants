@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Leaf, Apple, LeafyGreen, Users, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 const slides = [
   {
@@ -11,7 +12,7 @@ const slides = [
     cta: 'Shop Now',
     link: '/products',
     gradient: 'from-primary via-primary-light to-accent',
-    emoji: '🌿',
+    icon: <Leaf size={120} strokeWidth={1} />,
   },
   {
     title: 'Alphonso & Kesar Mango',
@@ -19,7 +20,7 @@ const slides = [
     cta: 'Shop Fruit Plants',
     link: '/products?category=Fruit+Plants',
     gradient: 'from-orange-500 via-amber-500 to-yellow-400',
-    emoji: '🥭',
+    icon: <Apple size={120} strokeWidth={1} />,
   },
   {
     title: 'Vegetable Seedlings',
@@ -27,7 +28,7 @@ const slides = [
     cta: 'Shop Vegetables',
     link: '/products?category=Vegetable+Plants',
     gradient: 'from-green-600 via-emerald-500 to-lime-400',
-    emoji: '🥬',
+    icon: <LeafyGreen size={120} strokeWidth={1} />,
   },
   {
     title: 'Bulk Orders Welcome',
@@ -35,7 +36,7 @@ const slides = [
     cta: 'Contact Us',
     link: '/products',
     gradient: 'from-accent via-primary-light to-primary',
-    emoji: '👨‍🌾',
+    icon: <Users size={120} strokeWidth={1} />,
   },
 ];
 
@@ -77,18 +78,18 @@ const HeroSlider = () => {
               <p className="text-lg md:text-2xl mb-8 opacity-90 font-light">{slide.subtitle}</p>
               <Link
                 to={slide.link}
-                className="inline-block bg-white text-primary font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                className="inline-flex items-center gap-2 bg-white text-primary font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
               >
-                {slide.cta} →
+                {slide.cta} <ArrowRight size={18} />
               </Link>
             </motion.div>
             <motion.div
               initial={{ x: 60, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-[8rem] md:text-[12rem] drop-shadow-2xl"
+              className="text-white/20 drop-shadow-2xl"
             >
-              {slide.emoji}
+              {slide.icon}
             </motion.div>
           </div>
         </motion.div>
@@ -97,15 +98,15 @@ const HeroSlider = () => {
       {/* Navigation arrows */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition text-xl"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition"
       >
-        ‹
+        <ChevronLeft size={24} />
       </button>
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition text-xl"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/40 transition"
       >
-        ›
+        <ChevronRight size={24} />
       </button>
 
       {/* Dots */}

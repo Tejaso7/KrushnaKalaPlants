@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import ProductBadge from './ProductBadge';
 import WishlistButton from './WishlistButton';
 import RatingStars from './RatingStars';
+import { Sprout, Plus } from 'lucide-react';
 
 // Determine badge type from product properties
 const getBadge = (product) => {
@@ -29,7 +30,7 @@ const ProductCard = ({ product, index = 0 }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group bg-bg-card rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col relative"
+      className="group bg-bg-card rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col relative border border-transparent hover:border-primary/10"
     >
       {/* Badge */}
       <ProductBadge type={getBadge(product)} />
@@ -44,7 +45,7 @@ const ProductCard = ({ product, index = 0 }) => {
         {product.image ? (
           <img src={product.image} alt={product.name} className="object-cover h-full w-full" />
         ) : (
-          <span className="text-6xl group-hover:scale-110 transition-transform duration-300">🌱</span>
+          <Sprout size={48} className="text-primary/40 group-hover:text-primary/60 transition-colors duration-300" />
         )}
       </Link>
 
@@ -71,9 +72,9 @@ const ProductCard = ({ product, index = 0 }) => {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => addToCart(product._id)}
-              className="text-xs bg-primary text-white px-4 py-2 rounded-full hover:bg-primary-light transition-all shadow-md hover:shadow-lg font-semibold"
+              className="text-xs bg-primary text-white px-4 py-2 rounded-full hover:bg-primary-light transition-all shadow-md hover:shadow-lg font-semibold flex items-center gap-1"
             >
-              + Add
+              <Plus size={14} /> Add
             </motion.button>
           )}
         </div>

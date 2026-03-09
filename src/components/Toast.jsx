@@ -1,6 +1,7 @@
 // components/Toast.jsx
 // Global toast notification component with Framer Motion
 import { motion, AnimatePresence } from 'framer-motion';
+import { Check, X, Info, AlertTriangle } from 'lucide-react';
 
 const Toast = ({ message, type = 'success', onClose }) => {
   if (!message) return null;
@@ -13,10 +14,10 @@ const Toast = ({ message, type = 'success', onClose }) => {
   };
 
   const icons = {
-    success: '✓',
-    error: '✕',
-    info: 'ℹ',
-    warning: '⚠',
+    success: <Check size={18} strokeWidth={3} />,
+    error: <X size={18} strokeWidth={3} />,
+    info: <Info size={18} />,
+    warning: <AlertTriangle size={18} />,
   };
 
   return (
@@ -29,10 +30,12 @@ const Toast = ({ message, type = 'success', onClose }) => {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className={`fixed top-24 right-6 z-[999] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl ${colors[type]} min-w-[280px]`}
         >
-          <span className="text-xl font-bold">{icons[type]}</span>
+          <span className="flex-shrink-0">{icons[type]}</span>
           <span className="text-sm font-medium flex-1">{message}</span>
           {onClose && (
-            <button onClick={onClose} className="opacity-70 hover:opacity-100 transition text-lg">✕</button>
+            <button onClick={onClose} className="opacity-70 hover:opacity-100 transition">
+              <X size={16} />
+            </button>
           )}
         </motion.div>
       )}
