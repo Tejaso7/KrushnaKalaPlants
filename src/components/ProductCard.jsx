@@ -1,5 +1,5 @@
 // components/ProductCard.jsx
-// Premium product card with badges, wishlist, rating, hover zoom, and animations
+// Clean professional product card
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
@@ -7,9 +7,8 @@ import { useAuth } from '../context/AuthContext';
 import ProductBadge from './ProductBadge';
 import WishlistButton from './WishlistButton';
 import RatingStars from './RatingStars';
-import { Sprout, Plus } from 'lucide-react';
+import { Sprout, ShoppingCart } from 'lucide-react';
 
-// Determine badge type from product properties
 const getBadge = (product) => {
   if (product.stock > 0 && product.stock <= 5) return 'limited';
   if (product.price < 300) return 'sale';
@@ -21,60 +20,59 @@ const ProductCard = ({ product, index = 0 }) => {
   const { addToCart } = useCart();
   const { user } = useAuth();
 
-  // Pseudo-random rating based on product id
   const rating = product._id ? (3.5 + (parseInt(product._id.slice(-2), 16) % 15) / 10) : 4.5;
   const reviews = product._id ? (10 + (parseInt(product._id.slice(-4), 16) % 200)) : 42;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group bg-bg-card rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col relative border border-transparent hover:border-primary/10"
+      transition={{ duration: 0.3, delay: index * 0.05 }}
+      className="group bg-bg-card rounded-xl border border-border hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col card-hover"
     >
       {/* Badge */}
       <ProductBadge type={getBadge(product)} />
 
       {/* Wishlist button */}
-      <div className="absolute top-3 right-3 z-10">
+      <div className="absolute top-2.5 right-2.5 z-10">
         <WishlistButton productId={product._id} />
       </div>
 
-      {/* Product image with hover zoom */}
-      <Link to={`/products/${product._id}`} className="img-zoom-container h-56 bg-accent-light/10 flex items-center justify-center">
+      {/* Product image */}
+      <Link to={`/products/${product._id}`} className="img-zoom-container h-52 bg-bg-warm flex items-center justify-center">
         {product.image ? (
           <img src={product.image} alt={product.name} className="object-cover h-full w-full" />
         ) : (
-          <Sprout size={48} className="text-primary/40 group-hover:text-primary/60 transition-colors duration-300" />
+          <Sprout size={40} className="text-primary/25 group-hover:text-primary/40 transition-colors" />
         )}
       </Link>
 
       {/* Product info */}
       <div className="p-4 flex flex-col flex-1">
+        <p className="text-[11px] text-text-muted uppercase tracking-wide font-medium mb-1">{product.category}</p>
         <Link to={`/products/${product._id}`}>
-          <h3 className="font-bold text-base text-primary-dark group-hover:text-primary transition-colors line-clamp-1">{product.name}</h3>
+          <h3 className="font-semibold text-[15px] text-text group-hover:text-primary transition-colors line-clamp-1">{product.name}</h3>
         </Link>
-        <p className="text-text-light text-xs mt-1 line-clamp-2 leading-relaxed">{product.description}</p>
+        <p className="text-text-light text-xs mt-1.5 line-clamp-2 leading-relaxed">{product.description}</p>
 
-        {/* Rating */}
         <div className="mt-2">
           <RatingStars rating={rating} reviews={reviews} />
         </div>
 
-        <div className="mt-auto pt-3 flex items-end justify-between">
+        <div className="mt-auto pt-3 flex items-end justify-between border-t border-border/50 mt-3">
           <div>
-            <span className="text-primary font-extrabold text-xl">₹{product.price}</span>
+            <span className="text-primary font-bold text-lg">₹{product.price}</span>
             {product.price > 200 && (
-              <span className="text-text-light line-through text-xs ml-2">₹{Math.round(product.price * 1.4)}</span>
+              <span className="text-text-muted line-through text-xs ml-1.5">₹{Math.round(product.price * 1.4)}</span>
             )}
           </div>
           {user && (
             <motion.button
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => addToCart(product._id)}
-              className="text-xs bg-primary text-white px-4 py-2 rounded-full hover:bg-primary-light transition-all shadow-md hover:shadow-lg font-semibold flex items-center gap-1"
+              className="text-xs bg-primary text-white px-3.5 py-2 rounded-lg hover:bg-primary-light transition-all font-medium flex items-center gap-1.5"
             >
-              <Plus size={14} /> Add
+              <ShoppingCart size={13} /> Add
             </motion.button>
           )}
         </div>
