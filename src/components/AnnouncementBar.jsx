@@ -1,45 +1,32 @@
 // components/AnnouncementBar.jsx
-// Top banner with rotating announcements, flash sale countdown, and marquee
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Truck, ShieldCheck, Apple, Phone } from 'lucide-react';
-
-const messages = [
-  { icon: <Truck size={14} className="inline-block mr-1" />, text: 'FREE Delivery across Maharashtra on bulk orders!' },
-  { icon: <ShieldCheck size={14} className="inline-block mr-1" />, text: 'Government Approved Hi-Tech Nursery — Quality Guaranteed' },
-  { icon: <Apple size={14} className="inline-block mr-1" />, text: 'New Season: Alphonso & Kesar Mango Saplings Available Now!' },
-  { icon: <Phone size={14} className="inline-block mr-1" />, text: 'Call 8999539204 or 7058151143 for Wholesale Enquiries' },
-];
+// Clean top utility bar with contact info and trust badge
+import { Phone, MapPin, ShieldCheck } from 'lucide-react';
 
 const AnnouncementBar = () => {
-  const [index, setIndex] = useState(0);
-
-  // Rotate messages every 4 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % messages.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <div className="bg-primary-dark text-accent-light text-xs md:text-sm py-2 overflow-hidden relative z-50">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={index}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="font-medium tracking-wide flex items-center justify-center gap-1"
-          >
-            {messages[index].icon} {messages[index].text}
-          </motion.p>
-        </AnimatePresence>
+    <div className="bg-primary-dark text-white/90 text-xs py-2 hidden md:block">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        <div className="flex items-center gap-5">
+          <a href="tel:8999539204" className="flex items-center gap-1.5 hover:text-white transition">
+            <Phone size={12} /> 8999 539 204
+          </a>
+          <a href="tel:7058151143" className="flex items-center gap-1.5 hover:text-white transition">
+            <Phone size={12} /> 7058 151 143
+          </a>
+          <span className="flex items-center gap-1.5">
+            <MapPin size={12} /> Malshiras, Solapur, Maharashtra
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <ShieldCheck size={12} className="text-accent-light" />
+          <span>Govt. Approved Hi-Tech Nursery</span>
+        </div>
       </div>
     </div>
   );
+};
+
+export default AnnouncementBar;
 };
 
 export default AnnouncementBar;

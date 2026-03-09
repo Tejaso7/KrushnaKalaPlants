@@ -2,6 +2,7 @@
 // Main app component with routing, layout, and toast notifications
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import AnnouncementBar from './components/AnnouncementBar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
@@ -20,10 +21,11 @@ const AppContent = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <AnnouncementBar />
       <Navbar />
       {/* Toast notification */}
       {toast && (
-        <div className="fixed top-20 right-4 z-50 bg-primary text-white px-6 py-3 rounded-xl shadow-lg toast-animate flex items-center gap-2">
+        <div className="fixed top-20 right-4 z-50 bg-primary text-white px-5 py-3 rounded-lg shadow-lg toast-animate flex items-center gap-2 text-sm font-medium">
           <Check size={16} /> {toast}
         </div>
       )}
