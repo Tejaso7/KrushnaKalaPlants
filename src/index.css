@@ -1,6 +1,9 @@
 /* index.css - Global styles with Tailwind CSS */
 @import "tailwindcss";
 
+/* Import premium font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 /* Custom green theme colors */
 @theme {
   --color-primary: #1B5E20;
@@ -8,25 +11,33 @@
   --color-primary-dark: #0D3B12;
   --color-accent: #4CAF50;
   --color-accent-light: #81C784;
-  --color-bg: #F1F8E9;
+  --color-bg: #F8FAF5;
   --color-bg-card: #FFFFFF;
-  --color-text: #1B1B1B;
-  --color-text-light: #555555;
-  --color-gold: #FFB300;
-  --color-badge-sale: #E53935;
-  --color-badge-best: #FF8F00;
-  --color-badge-limited: #6A1B9A;
-  --color-dark-bg: #121212;
-  --color-dark-card: #1E1E1E;
-  --color-dark-text: #E0E0E0;
-  --color-dark-text-light: #9E9E9E;
+  --color-text: #1A1A1A;
+  --color-text-light: #6B7280;
+  --color-gold: #F59E0B;
+  --color-badge-sale: #DC2626;
+  --color-badge-best: #EA580C;
+  --color-badge-limited: #7C3AED;
+  --color-dark-bg: #0F0F0F;
+  --color-dark-card: #1A1A1A;
+  --color-dark-text: #E5E5E5;
+  --color-dark-text-light: #9CA3AF;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: background-color 0.3s, color 0.3s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }
 
 /* Dark mode */
@@ -53,13 +64,13 @@ body.dark .text-text-light { color: var(--color-dark-text-light); }
   100% { background-position: 200% 0; }
 }
 .skeleton {
-  background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 0.75rem;
 }
 body.dark .skeleton {
-  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background: linear-gradient(90deg, #1f1f1f 25%, #2d2d2d 50%, #1f1f1f 75%);
   background-size: 200% 100%;
 }
 
@@ -71,7 +82,7 @@ body.dark .skeleton {
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .img-zoom-container:hover img {
-  transform: scale(1.15);
+  transform: scale(1.08);
 }
 
 /* Announcement marquee */
@@ -84,8 +95,16 @@ body.dark .skeleton {
 }
 
 /* Scrollbar styling */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 4px; }
-body.dark ::-webkit-scrollbar-track { background: #2a2a2a; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+body.dark ::-webkit-scrollbar-track { background: transparent; }
 body.dark ::-webkit-scrollbar-thumb { background: var(--color-primary-light); }
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
