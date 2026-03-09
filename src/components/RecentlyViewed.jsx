@@ -16,30 +16,30 @@ const RecentlyViewed = () => {
   if (items.length === 0) return null;
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12">
-      <h2 className="text-2xl font-bold text-primary-dark mb-6">Recently Viewed</h2>
-      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+    <section className="max-w-7xl mx-auto px-4 py-10">
+      <h2 className="text-lg font-bold text-text-primary mb-4">Recently Viewed</h2>
+      <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide">
         {items.map((item, i) => (
           <motion.div
             key={item._id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            transition={{ delay: i * 0.05 }}
           >
             <Link
               to={`/products/${item._id}`}
-              className="flex-shrink-0 w-40 bg-bg-card rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              className="flex-shrink-0 w-36 bg-white rounded-xl border border-border overflow-hidden card-hover block"
             >
-              <div className="h-32 bg-accent-light/20 flex items-center justify-center">
+              <div className="h-28 bg-bg-warm flex items-center justify-center">
                 {item.image ? (
                   <img src={item.image} alt={item.name} className="object-cover h-full w-full" />
                 ) : (
-                  <Sprout size={32} className="text-primary" />
+                  <Sprout size={24} className="text-primary/20" />
                 )}
               </div>
-              <div className="p-3">
-                <p className="text-sm font-semibold text-primary-dark truncate">{item.name}</p>
-                <p className="text-xs font-bold text-primary">₹{item.price}</p>
+              <div className="p-2.5">
+                <p className="text-xs font-semibold text-text-primary truncate">{item.name}</p>
+                <p className="text-xs font-bold text-primary mt-0.5">₹{item.price}</p>
               </div>
             </Link>
           </motion.div>
@@ -49,7 +49,6 @@ const RecentlyViewed = () => {
   );
 };
 
-// Helper to add a product to recently viewed
 export const addToRecentlyViewed = (product) => {
   const stored = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
   const filtered = stored.filter((p) => p._id !== product._id);

@@ -1,9 +1,9 @@
 // components/Footer.jsx
-// Premium footer with newsletter, social links, and branding
+// Professional multi-column footer
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Leaf, Instagram, Facebook, Twitter, MapPin, Check, User, Phone, Send } from 'lucide-react';
+import { Leaf, Instagram, Facebook, Twitter, MapPin, Check, Phone, Send, Mail, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -15,55 +15,55 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-primary-dark text-white mt-16">
+    <footer className="bg-primary-dark text-white/90 mt-0">
       {/* Newsletter */}
-      <div className="bg-gradient-to-r from-primary to-accent py-12 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-extrabold mb-2 flex items-center justify-center gap-2">
-            <Leaf size={28} /> Join the KrishnaKala Plants Family
-          </h3>
-          <p className="text-accent-light/80 mb-6">Get wholesale rates, seasonal updates, and new plant availability alerts.</p>
-          {subscribed ? (
-            <motion.p initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="text-accent-light font-bold text-lg flex items-center justify-center gap-2">
-              <Check size={20} /> Thank you for subscribing!
-            </motion.p>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-5 py-3 rounded-full text-primary-dark focus:outline-none focus:ring-2 focus:ring-accent-light"
-              />
-              <button type="submit" className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:bg-accent-light hover:text-white transition-all shadow-md flex items-center justify-center gap-2">
-                <Send size={16} /> Subscribe
-              </button>
-            </form>
-          )}
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <Mail size={20} /> Subscribe to Our Newsletter
+              </h3>
+              <p className="text-white/50 text-sm mt-1">Get seasonal updates, offers and new plant alerts</p>
+            </div>
+            {subscribed ? (
+              <motion.p initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-accent-light font-medium text-sm flex items-center gap-2">
+                <Check size={16} /> Thank you for subscribing!
+              </motion.p>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2 w-full md:w-auto">
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email"
+                  className="flex-1 md:w-72 px-4 py-2.5 rounded-lg bg-white/10 border border-white/10 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 transition" />
+                <button type="submit" className="bg-primary text-white font-medium px-5 py-2.5 rounded-lg hover:bg-primary-light transition text-sm flex items-center gap-1.5">
+                  Subscribe <ArrowRight size={14} />
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+      {/* Main footer columns */}
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Brand */}
-        <div className="md:col-span-1">
-          <h3 className="text-2xl font-extrabold mb-3 flex items-center gap-2">
-            <img src="/logo.png" alt="KrishnaKala Plants Logo" className="h-10 w-10 rounded-full object-cover" /> KrishnaKala Plants
-          </h3>
-          <p className="text-sm text-accent-light/80 leading-relaxed">
-            KrishnaKala Plants (Govt. Approved) — Premium wholesale nursery supplying fruit plants, vegetable seedlings, spice crops & ornamental plants across Maharashtra.
+        <div className="md:col-span-4">
+          <div className="flex items-center gap-2.5 mb-3">
+            <img src="/logo.png" alt="KrishnaKala Plants" className="h-9 w-9 rounded-lg object-cover" />
+            <div>
+              <span className="text-lg font-bold text-white block leading-none">KrishnaKala Plants</span>
+              <span className="text-[10px] text-white/40 font-medium tracking-wider uppercase">Govt. Approved Nursery</span>
+            </div>
+          </div>
+          <p className="text-sm text-white/50 leading-relaxed mt-2">
+            Premium wholesale nursery supplying fruit plants, vegetable seedlings, spice crops & ornamental plants across Maharashtra since 2010.
           </p>
-          {/* Social icons */}
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-2 mt-4">
             {[
-              { icon: <Instagram size={18} />, label: 'Instagram' },
-              { icon: <Facebook size={18} />, label: 'Facebook' },
-              { icon: <Twitter size={18} />, label: 'Twitter' },
-              { icon: <MapPin size={18} />, label: 'Location' },
+              { icon: <Instagram size={16} />, label: 'Instagram' },
+              { icon: <Facebook size={16} />, label: 'Facebook' },
+              { icon: <Twitter size={16} />, label: 'Twitter' },
             ].map((social, i) => (
-              <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label={social.label}>
+              <a key={i} href="#" className="w-9 h-9 rounded-lg bg-white/8 flex items-center justify-center hover:bg-white/15 transition" aria-label={social.label}>
                 {social.icon}
               </a>
             ))}
@@ -71,14 +71,14 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h4 className="font-bold text-lg mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm text-accent-light/80">
+        <div className="md:col-span-2">
+          <h4 className="font-semibold text-white text-sm mb-4">Quick Links</h4>
+          <ul className="space-y-2 text-sm text-white/50">
             {[
               { to: '/', label: 'Home' },
               { to: '/products', label: 'All Plants' },
               { to: '/products?category=Fruit+Plants', label: 'Fruit Plants' },
-              { to: '/products?category=Vegetable+Plants', label: 'Vegetable Plants' },
+              { to: '/products?category=Vegetable+Plants', label: 'Vegetables' },
               { to: '/products?category=Spice+Plants', label: 'Spice Plants' },
             ].map((link) => (
               <li key={link.to}><Link to={link.to} className="hover:text-white transition">{link.label}</Link></li>
@@ -87,36 +87,51 @@ const Footer = () => {
         </div>
 
         {/* Support */}
-        <div>
-          <h4 className="font-bold text-lg mb-4">Support</h4>
-          <ul className="space-y-2 text-sm text-accent-light/80">
+        <div className="md:col-span-2">
+          <h4 className="font-semibold text-white text-sm mb-4">Support</h4>
+          <ul className="space-y-2 text-sm text-white/50">
             <li><a href="#" className="hover:text-white transition">Help Center</a></li>
             <li><a href="#" className="hover:text-white transition">Shipping Info</a></li>
-            <li><a href="#" className="hover:text-white transition">Returns</a></li>
+            <li><a href="#" className="hover:text-white transition">Returns Policy</a></li>
             <li><a href="#" className="hover:text-white transition">Plant Care Guide</a></li>
             <li><a href="#" className="hover:text-white transition">FAQs</a></li>
           </ul>
         </div>
 
         {/* Contact */}
-        <div>
-          <h4 className="font-bold text-lg mb-4">Contact Us</h4>
-          <ul className="space-y-3 text-sm text-accent-light/80">
-            <li className="flex items-start gap-2"><User size={16} className="mt-0.5 flex-shrink-0" /> <span><strong>Vitthal Krishna Bandgar</strong><br/><span className="flex items-center gap-1"><Phone size={12} /> <a href="tel:8999539204" className="hover:text-white">8999539204</a></span></span></li>
-            <li className="flex items-start gap-2"><User size={16} className="mt-0.5 flex-shrink-0" /> <span><strong>Atharva Vitthal Bandgar</strong><br/><span className="flex items-center gap-1"><Phone size={12} /> <a href="tel:7058151143" className="hover:text-white">7058151143</a></span></span></li>
-            <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 flex-shrink-0" /> <span>Balajinagar (Bhaubadi), Nhavsd Road,<br/>Malshiras, Tal. Malshiras,<br/>Dist. Solapur — 413107,<br/>Maharashtra, India</span></li>
+        <div className="md:col-span-4">
+          <h4 className="font-semibold text-white text-sm mb-4">Contact Us</h4>
+          <ul className="space-y-3 text-sm text-white/50">
+            <li className="flex items-start gap-2.5">
+              <Phone size={14} className="mt-0.5 flex-shrink-0 text-white/30" />
+              <div>
+                <p className="text-white/70 font-medium">Vitthal Krishna Bandgar</p>
+                <a href="tel:8999539204" className="hover:text-white transition">8999 539 204</a>
+              </div>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Phone size={14} className="mt-0.5 flex-shrink-0 text-white/30" />
+              <div>
+                <p className="text-white/70 font-medium">Atharva Vitthal Bandgar</p>
+                <a href="tel:7058151143" className="hover:text-white transition">7058 151 143</a>
+              </div>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <MapPin size={14} className="mt-0.5 flex-shrink-0 text-white/30" />
+              <span>Balajinagar (Bhaubadi), Nhavsd Road,<br/>Malshiras, Dist. Solapur — 413107,<br/>Maharashtra, India</span>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10 text-center py-5 text-xs text-accent-light/60">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} KrishnaKala Plants. All rights reserved. (Govt. Approved)</span>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-white transition">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition">Terms of Service</a>
-            <a href="#" className="hover:text-white transition">Refund Policy</a>
+      <div className="border-t border-white/8 py-5">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/35">
+          <span>&copy; {new Date().getFullYear()} KrishnaKala Plants. All rights reserved.</span>
+          <div className="flex gap-5">
+            <a href="#" className="hover:text-white/60 transition">Privacy Policy</a>
+            <a href="#" className="hover:text-white/60 transition">Terms of Service</a>
+            <a href="#" className="hover:text-white/60 transition">Refund Policy</a>
           </div>
         </div>
       </div>

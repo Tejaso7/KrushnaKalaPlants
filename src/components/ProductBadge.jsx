@@ -1,5 +1,4 @@
 // components/ProductBadge.jsx
-// Display badges like Sale, Bestseller, Limited on product cards
 import { motion } from 'framer-motion';
 import { Flame, Star, Gem, Sparkles } from 'lucide-react';
 
@@ -11,10 +10,10 @@ const badgeStyles = {
 };
 
 const badgeIcons = {
-  sale: <Flame size={12} />,
-  bestseller: <Star size={12} />,
-  limited: <Gem size={12} />,
-  new: <Sparkles size={12} />,
+  sale: <Flame size={11} />,
+  bestseller: <Star size={11} />,
+  limited: <Gem size={11} />,
+  new: <Sparkles size={11} />,
 };
 
 const badgeLabels = {
@@ -29,7 +28,7 @@ const ProductBadge = ({ type = 'sale' }) => {
     <motion.span
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
-      className={`absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1 ${badgeStyles[type]}`}
+      className={`absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-md text-[10px] font-semibold flex items-center gap-1 ${badgeStyles[type]}`}
     >
       {badgeIcons[type]} {badgeLabels[type]}
     </motion.span>

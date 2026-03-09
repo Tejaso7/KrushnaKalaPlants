@@ -5,7 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import API from '../services/api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { Sprout, ArrowLeft, ShoppingCart } from 'lucide-react';
+import { Sprout, ChevronRight, ShoppingCart, Truck, ShieldCheck, Package } from 'lucide-react';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -32,51 +32,83 @@ const ProductDetails = () => {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-3 border-primary border-t-transparent"></div>
       </div>
     );
   }
 
   if (!product) {
-    return <p className="text-center py-20 text-lg text-text-light">Product not found.</p>;
+    return <p className="text-center py-20 text-lg text-text-muted">Product not found.</p>;
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <Link to="/products" className="text-primary hover:underline text-sm mb-6 inline-flex items-center gap-1"><ArrowLeft size={14} /> Back to Shop</Link>
-      <div className="bg-bg-card rounded-2xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-0">
+    <div className="max-w-6xl mx-auto px-4 py-6">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-1.5 text-xs text-text-muted mb-6">
+        <Link to="/" className="hover:text-primary transition">Home</Link>
+        <ChevronRight size={12} />
+        <Link to="/products" className="hover:text-primary transition">Plants</Link>
+        <ChevronRight size={12} />
+        <span className="text-text-primary font-medium">{product.name}</span>
+      </nav>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {/* Image */}
-        <div className="h-80 md:h-auto bg-accent-light/20 flex items-center justify-center">
+        <div className="bg-bg-warm rounded-xl border border-border overflow-hidden aspect-square flex items-center justify-center">
           {product.image ? (
             <img src={product.image} alt={product.name} className="object-cover h-full w-full" />
           ) : (
-            <Sprout size={80} className="text-primary/30" />
+            <Sprout size={80} className="text-primary/20" />
           )}
         </div>
+
         {/* Details */}
-        <div className="p-8 flex flex-col justify-center">
-          <span className="text-xs uppercase tracking-wider text-accent font-semibold">{product.category}</span>
-          <h1 className="text-3xl font-bold text-primary-dark mt-2">{product.name}</h1>
-          <p className="text-text-light mt-4 leading-relaxed">{product.description}</p>
-          <p className="text-3xl font-bold text-primary mt-6">₹{product.price}</p>
-          <p className="text-sm text-text-light mt-1">
-            {product.stock > 0 ? (
-              <span className="text-accent font-semibold">In Stock ({product.stock} left)</span>
+        <div className="flex flex-col justify-center">
+          <span className="text-xs uppercase tracking-wider text-primary font-semibold">{product.category}</span>
+          <h1 className="text-2xl md:text-3xl font-bold text-text-primary mt-2">{product.name}</h1>
+          <p className="text-text-muted mt-3 leading-relaxed text-sm">{product.description}</p>
+
+          <div className="mt-5 pb-5 border-b border-border">
+            <p className="text-3xl font-bold text-text-primary">₹{product.price}</p>
+            <p className="text-sm mt-1">
+              {product.stock > 0 ? (
+                <span className="text-primary font-medium">In Stock ({product.stock} available)</span>
+              ) : (
+                <span className="text-red-500 font-medium">Out of Stock</span>
+              )}
+            </p>
+          </div>
+
+          {/* Action */}
+          <div className="mt-5">
+            {user ? (
+              <button
+                onClick={() => addToCart(product._id)}
+                disabled={product.stock === 0}
+                className="bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-light transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm"
+              >
+                <ShoppingCart size={16} /> Add to Cart
+              </button>
             ) : (
-              <span className="text-red-500 font-semibold">Out of Stock</span>
+              <Link to="/login" className="inline-block bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-light transition text-sm">
+                Login to Purchase
+              </Link>
             )}
-          </p>
-          {user ? (
-            <button
-              onClick={() => addToCart(product._id)}
-              disabled={product.stock === 0}
-              className="mt-6 bg-primary text-white font-semibold px-8 py-3 rounded-full hover:bg-primary-light transition disabled:opacity-50 disabled:cursor-not-allowed w-fit flex items-center gap-2"
-            >
-              <ShoppingCart size={18} /> Add to Cart
-            </button>
-          ) : (
-            <Link to="/login" className="mt-6 text-primary underline text-sm">Login to add to cart</Link>
-          )}
+          </div>
+
+          {/* Trust signals */}
+          <div className="mt-6 pt-5 border-t border-border grid grid-cols-3 gap-3">
+            {[
+              { icon: <Truck size={16} />, label: 'Safe Delivery' },
+              { icon: <ShieldCheck size={16} />, label: 'Govt. Approved' },
+              { icon: <Package size={16} />, label: 'Secure Packing' },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center gap-1 text-center">
+                <span className="text-primary/60">{item.icon}</span>
+                <span className="text-[11px] text-text-muted">{item.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

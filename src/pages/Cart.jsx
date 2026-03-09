@@ -1,23 +1,21 @@
 // pages/Cart.jsx
-// Cart page showing items, quantity controls, total, and checkout link
+// Cart page showing items, quantity controls, total, and checkout
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import { useState } from 'react';
-import { ShoppingCart, Sprout, Minus, Plus, X, ArrowRight } from 'lucide-react';
+import { ShoppingCart, Sprout, Minus, Plus, X, ArrowRight, ChevronRight, ShieldCheck } from 'lucide-react';
 
 const Cart = () => {
   const { cart, loading, updateCartItem, removeCartItem, fetchCart } = useCart();
   const navigate = useNavigate();
   const [placing, setPlacing] = useState(false);
 
-  // Calculate total
   const total = cart?.items?.reduce((sum, item) => {
     const price = item.product?.price || 0;
     return sum + price * item.quantity;
   }, 0) || 0;
 
-  // Place order
   const handleCheckout = async () => {
     setPlacing(true);
     try {
@@ -35,86 +33,103 @@ const Cart = () => {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-3 border-primary border-t-transparent"></div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-primary-dark mb-6">Your Cart</h1>
+    <div className="max-w-5xl mx-auto px-4 py-6">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-1.5 text-xs text-text-muted mb-5">
+        <Link to="/" className="hover:text-primary transition">Home</Link>
+        <ChevronRight size={12} />
+        <span className="text-text-primary font-medium">Cart</span>
+      </nav>
+
+      <h1 className="text-2xl font-bold text-text-primary mb-6">Shopping Cart</h1>
 
       {!cart?.items?.length ? (
         <div className="text-center py-20">
-          <ShoppingCart size={64} className="mx-auto text-primary/30" />
-          <p className="text-text-light mt-4 text-lg">Your cart is empty</p>
-          <Link to="/products" className="mt-4 inline-flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-light transition">
-            Browse Plants <ArrowRight size={16} />
+          <ShoppingCart size={48} className="mx-auto text-border" />
+          <p className="text-text-muted mt-4">Your cart is empty</p>
+          <Link to="/products" className="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg hover:bg-primary-light transition text-sm font-medium">
+            Browse Plants <ArrowRight size={14} />
           </Link>
         </div>
       ) : (
-        <>
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Cart items */}
+          <div className="lg:col-span-2 space-y-3">
             {cart.items.map((item) => (
-              <div key={item._id} className="bg-bg-card rounded-2xl shadow-md p-4 flex items-center gap-4">
-                {/* Product image */}
-                <div className="w-20 h-20 rounded-xl bg-accent-light/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <div key={item._id} className="bg-white rounded-xl border border-border p-4 flex items-center gap-4">
+                <div className="w-16 h-16 rounded-lg bg-bg-warm flex items-center justify-center flex-shrink-0 overflow-hidden">
                   {item.product?.image ? (
                     <img src={item.product.image} alt={item.product.name} className="object-cover h-full w-full" />
                   ) : (
-                    <Sprout size={28} className="text-primary/40" />
+                    <Sprout size={20} className="text-primary/30" />
                   )}
                 </div>
-                {/* Info */}
-                <div className="flex-1">
-                  <h3 className="font-semibold text-primary-dark">{item.product?.name}</h3>
-                  <p className="text-sm text-text-light">₹{item.product?.price} each</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-text-primary text-sm truncate">{item.product?.name}</h3>
+                  <p className="text-xs text-text-muted">₹{item.product?.price} each</p>
                 </div>
-                {/* Quantity controls */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => updateCartItem(item._id, Math.max(1, item.quantity - 1))}
-                    className="w-8 h-8 rounded-full bg-gray-200 text-primary-dark font-bold hover:bg-gray-300 transition flex items-center justify-center"
+                    className="w-7 h-7 rounded-md border border-border text-text-muted hover:bg-bg-warm transition flex items-center justify-center"
                   >
-                    <Minus size={14} />
+                    <Minus size={12} />
                   </button>
-                  <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                  <span className="w-7 text-center text-sm font-semibold">{item.quantity}</span>
                   <button
                     onClick={() => updateCartItem(item._id, item.quantity + 1)}
-                    className="w-8 h-8 rounded-full bg-gray-200 text-primary-dark font-bold hover:bg-gray-300 transition flex items-center justify-center"
+                    className="w-7 h-7 rounded-md border border-border text-text-muted hover:bg-bg-warm transition flex items-center justify-center"
                   >
-                    <Plus size={14} />
+                    <Plus size={12} />
                   </button>
                 </div>
-                {/* Subtotal */}
-                <p className="font-bold text-primary w-20 text-right">₹{(item.product?.price * item.quantity).toFixed(2)}</p>
-                {/* Remove */}
+                <p className="font-semibold text-text-primary w-20 text-right text-sm">₹{(item.product?.price * item.quantity).toFixed(2)}</p>
                 <button
                   onClick={() => removeCartItem(item._id)}
-                  className="text-red-500 hover:text-red-700 transition"
+                  className="text-text-muted hover:text-red-500 transition"
                   title="Remove"
                 >
-                  <X size={18} />
+                  <X size={16} />
                 </button>
               </div>
             ))}
           </div>
 
-          {/* Cart Summary */}
-          <div className="mt-8 bg-bg-card rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between">
-            <div>
-              <p className="text-text-light text-sm">Total ({cart.items.length} item{cart.items.length > 1 ? 's' : ''})</p>
-              <p className="text-3xl font-bold text-primary-dark">₹{total.toFixed(2)}</p>
+          {/* Order Summary */}
+          <div className="bg-white rounded-xl border border-border p-5 h-fit sticky top-24">
+            <h3 className="font-semibold text-text-primary mb-4">Order Summary</h3>
+            <div className="space-y-2 text-sm border-b border-border pb-4 mb-4">
+              <div className="flex justify-between text-text-muted">
+                <span>Subtotal ({cart.items.length} item{cart.items.length > 1 ? 's' : ''})</span>
+                <span>₹{total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-text-muted">
+                <span>Shipping</span>
+                <span className="text-primary font-medium">Free</span>
+              </div>
+            </div>
+            <div className="flex justify-between font-bold text-text-primary mb-5">
+              <span>Total</span>
+              <span>₹{total.toFixed(2)}</span>
             </div>
             <button
               onClick={handleCheckout}
               disabled={placing}
-              className="mt-4 md:mt-0 bg-primary text-white font-semibold px-10 py-3 rounded-full hover:bg-primary-light transition disabled:opacity-50"
+              className="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:bg-primary-light transition disabled:opacity-50 text-sm"
             >
               {placing ? 'Placing Order...' : 'Place Order'}
             </button>
+            <p className="flex items-center justify-center gap-1.5 text-[11px] text-text-muted mt-3">
+              <ShieldCheck size={12} /> Secure checkout
+            </p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
