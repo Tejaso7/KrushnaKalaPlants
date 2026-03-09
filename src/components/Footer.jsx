@@ -3,6 +3,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Leaf, Instagram, Facebook, Twitter, MapPin, Check, User, Phone, Send } from 'lucide-react';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -18,11 +19,13 @@ const Footer = () => {
       {/* Newsletter */}
       <div className="bg-gradient-to-r from-primary to-accent py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-extrabold mb-2">🌿 Join the Krushnakala Family</h3>
+          <h3 className="text-2xl md:text-3xl font-extrabold mb-2 flex items-center justify-center gap-2">
+            <Leaf size={28} /> Join the Krushnakala Family
+          </h3>
           <p className="text-accent-light/80 mb-6">Get wholesale rates, seasonal updates, and new plant availability alerts.</p>
           {subscribed ? (
-            <motion.p initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="text-accent-light font-bold text-lg">
-              ✓ Thank you for subscribing!
+            <motion.p initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="text-accent-light font-bold text-lg flex items-center justify-center gap-2">
+              <Check size={20} /> Thank you for subscribing!
             </motion.p>
           ) : (
             <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -34,8 +37,8 @@ const Footer = () => {
                 placeholder="Enter your email"
                 className="flex-1 px-5 py-3 rounded-full text-primary-dark focus:outline-none focus:ring-2 focus:ring-accent-light"
               />
-              <button type="submit" className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:bg-accent-light hover:text-white transition-all shadow-md">
-                Subscribe
+              <button type="submit" className="bg-white text-primary font-bold px-8 py-3 rounded-full hover:bg-accent-light hover:text-white transition-all shadow-md flex items-center justify-center gap-2">
+                <Send size={16} /> Subscribe
               </button>
             </form>
           )}
@@ -54,9 +57,14 @@ const Footer = () => {
           </p>
           {/* Social icons */}
           <div className="flex gap-3 mt-4">
-            {['📷', '📘', '🐦', '📌'].map((icon, i) => (
-              <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition text-lg">
-                {icon}
+            {[
+              { icon: <Instagram size={18} />, label: 'Instagram' },
+              { icon: <Facebook size={18} />, label: 'Facebook' },
+              { icon: <Twitter size={18} />, label: 'Twitter' },
+              { icon: <MapPin size={18} />, label: 'Location' },
+            ].map((social, i) => (
+              <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition" aria-label={social.label}>
+                {social.icon}
               </a>
             ))}
           </div>
@@ -94,9 +102,9 @@ const Footer = () => {
         <div>
           <h4 className="font-bold text-lg mb-4">Contact Us</h4>
           <ul className="space-y-3 text-sm text-accent-light/80">
-            <li className="flex items-start gap-2">👤 <span><strong>Vitthal Krishna Bandgar</strong><br/>📞 <a href="tel:8999539204" className="hover:text-white">8999539204</a></span></li>
-            <li className="flex items-start gap-2">👤 <span><strong>Atharva Vitthal Bandgar</strong><br/>📞 <a href="tel:7058151143" className="hover:text-white">7058151143</a></span></li>
-            <li className="flex items-start gap-2">📍 <span>Balajinagar (Bhaubadi), Nhavsd Road,<br/>Malshiras, Tal. Malshiras,<br/>Dist. Solapur — 413107,<br/>Maharashtra, India</span></li>
+            <li className="flex items-start gap-2"><User size={16} className="mt-0.5 flex-shrink-0" /> <span><strong>Vitthal Krishna Bandgar</strong><br/><span className="flex items-center gap-1"><Phone size={12} /> <a href="tel:8999539204" className="hover:text-white">8999539204</a></span></span></li>
+            <li className="flex items-start gap-2"><User size={16} className="mt-0.5 flex-shrink-0" /> <span><strong>Atharva Vitthal Bandgar</strong><br/><span className="flex items-center gap-1"><Phone size={12} /> <a href="tel:7058151143" className="hover:text-white">7058151143</a></span></span></li>
+            <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 flex-shrink-0" /> <span>Balajinagar (Bhaubadi), Nhavsd Road,<br/>Malshiras, Tal. Malshiras,<br/>Dist. Solapur — 413107,<br/>Maharashtra, India</span></li>
           </ul>
         </div>
       </div>
@@ -104,7 +112,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="border-t border-white/10 text-center py-5 text-xs text-accent-light/60">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2">
-          <span>© {new Date().getFullYear()} Krushnakala Hi-Tech Nursery. All rights reserved. (Govt. Approved)</span>
+          <span>&copy; {new Date().getFullYear()} Krushnakala Hi-Tech Nursery. All rights reserved. (Govt. Approved)</span>
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
             <a href="#" className="hover:text-white transition">Terms of Service</a>

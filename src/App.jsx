@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
 import { useCart } from './context/CartContext';
+import { Check } from 'lucide-react';
 
 const AppContent = () => {
   const { toast } = useCart();
@@ -22,8 +23,8 @@ const AppContent = () => {
       <Navbar />
       {/* Toast notification */}
       {toast && (
-        <div className="fixed top-20 right-4 z-50 bg-primary text-white px-6 py-3 rounded-xl shadow-lg toast-animate">
-          {toast}
+        <div className="fixed top-20 right-4 z-50 bg-primary text-white px-6 py-3 rounded-xl shadow-lg toast-animate flex items-center gap-2">
+          <Check size={16} /> {toast}
         </div>
       )}
       <main className="flex-1">

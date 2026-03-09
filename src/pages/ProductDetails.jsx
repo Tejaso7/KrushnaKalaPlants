@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import API from '../services/api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { Sprout, ArrowLeft, ShoppingCart } from 'lucide-react';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -42,14 +43,14 @@ const ProductDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <Link to="/products" className="text-primary hover:underline text-sm mb-6 inline-block">← Back to Shop</Link>
+      <Link to="/products" className="text-primary hover:underline text-sm mb-6 inline-flex items-center gap-1"><ArrowLeft size={14} /> Back to Shop</Link>
       <div className="bg-bg-card rounded-2xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-0">
         {/* Image */}
         <div className="h-80 md:h-auto bg-accent-light/20 flex items-center justify-center">
           {product.image ? (
             <img src={product.image} alt={product.name} className="object-cover h-full w-full" />
           ) : (
-            <span className="text-8xl">🌱</span>
+            <Sprout size={80} className="text-primary/30" />
           )}
         </div>
         {/* Details */}
@@ -69,9 +70,9 @@ const ProductDetails = () => {
             <button
               onClick={() => addToCart(product._id)}
               disabled={product.stock === 0}
-              className="mt-6 bg-primary text-white font-semibold px-8 py-3 rounded-full hover:bg-primary-light transition disabled:opacity-50 disabled:cursor-not-allowed w-fit"
+              className="mt-6 bg-primary text-white font-semibold px-8 py-3 rounded-full hover:bg-primary-light transition disabled:opacity-50 disabled:cursor-not-allowed w-fit flex items-center gap-2"
             >
-              Add to Cart
+              <ShoppingCart size={18} /> Add to Cart
             </button>
           ) : (
             <Link to="/login" className="mt-6 text-primary underline text-sm">Login to add to cart</Link>
