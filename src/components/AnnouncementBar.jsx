@@ -27,6 +27,3 @@ const AnnouncementBar = () => {
 };
 
 export default AnnouncementBar;
-};
-
-export default AnnouncementBar;
