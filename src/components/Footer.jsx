@@ -105,8 +105,8 @@ const Footer = () => {
             <li className="flex items-start gap-2.5">
               <Phone size={14} className="mt-0.5 flex-shrink-0 text-white/30" />
               <div>
-                <p className="text-white/70 font-medium">Vitthal Krishna Bandgar</p>
-                <a href="tel:8999539204" className="hover:text-white transition">8999 539 204</a>
+                <p className="text-white/70 font-medium">Prathamesh Vitthal Bandgar</p>
+                <a href="tel:8788166143" className="hover:text-white transition">8788 166 143</a>
               </div>
             </li>
             <li className="flex items-start gap-2.5">
@@ -118,7 +118,7 @@ const Footer = () => {
             </li>
             <li className="flex items-start gap-2.5">
               <MapPin size={14} className="mt-0.5 flex-shrink-0 text-white/30" />
-              <span>Balajinagar (Bhaubadi), Nhavsd Road,<br/>Malshiras, Dist. Solapur — 413107,<br/>Maharashtra, India</span>
+              <span>Balajinagar (Bhamburdi), Mhaswad Road,<br/>Malshiras, Dist. Solapur — 413107,<br/>Maharashtra, India</span>
             </li>
           </ul>
         </div>
