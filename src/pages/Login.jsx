@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="bg-bg-card rounded-2xl shadow-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-primary-dark mb-6 text-center">Login to KrishnaKala</h2>
+        <h2 className="text-2xl font-bold text-primary-dark mb-6 text-center">Login to KrishnaKala Plants</h2>
         {error && <div className="bg-red-100 text-red-700 px-4 py-2 rounded-lg mb-4 text-sm">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

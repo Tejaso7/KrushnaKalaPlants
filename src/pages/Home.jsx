@@ -21,7 +21,7 @@ const categories = [
 ];
 
 const testimonials = [
-  { name: 'Rajesh P.', text: 'Bought 500 Alphonso mango saplings from Krushnakala. Excellent quality, all plants survived transplanting. Best wholesale nursery in Solapur district!', rating: 5 },
+  { name: 'Rajesh P.', text: 'Bought 500 Alphonso mango saplings from KrishnaKala Plants. Excellent quality, all plants survived transplanting. Best wholesale nursery in Solapur district!', rating: 5 },
   { name: 'Sunita D.', text: 'Their pomegranate and guava plants are top-notch. Government approved nursery so you get guaranteed quality. Highly recommended for farmers.', rating: 5 },
   { name: 'Manoj K.', text: 'Great collection of vegetable seedlings. Tomato and brinjal plants were healthy and started fruiting quickly. Will order again for next season.', rating: 4 },
 ];
@@ -132,7 +132,7 @@ const Home = () => {
       <section className="bg-primary-dark text-white py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold text-center mb-12">
-            Why Choose Krushnakala?
+            Why Choose KrishnaKala Plants?
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -195,7 +195,7 @@ const Home = () => {
         <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }}>
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Ready to Grow?</h2>
           <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-            Join 10,000+ happy farmers. Order premium nursery plants at wholesale rates from Krushnakala Hi-Tech Nursery.
+            Join 10,000+ happy farmers. Order premium nursery plants at wholesale rates from KrishnaKala Plants.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/products" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all shadow-xl hover:scale-105">

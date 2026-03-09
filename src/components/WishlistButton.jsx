@@ -2,6 +2,7 @@
 // Heart icon button for wishlisting products (localStorage based)
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Heart } from 'lucide-react';
 
 const WishlistButton = ({ productId, size = 'md' }) => {
   const [wishlisted, setWishlisted] = useState(false);
@@ -25,7 +26,8 @@ const WishlistButton = ({ productId, size = 'md' }) => {
     setWishlisted(!wishlisted);
   };
 
-  const sizeClass = size === 'lg' ? 'w-10 h-10 text-xl' : 'w-8 h-8 text-base';
+  const sizeClass = size === 'lg' ? 'w-10 h-10' : 'w-8 h-8';
+  const iconSize = size === 'lg' ? 20 : 16;
 
   return (
     <motion.button
@@ -41,8 +43,9 @@ const WishlistButton = ({ productId, size = 'md' }) => {
       <motion.span
         animate={wishlisted ? { scale: [1, 1.3, 1] } : {}}
         transition={{ duration: 0.3 }}
+        className="flex items-center justify-center"
       >
-        {wishlisted ? '♥' : '♡'}
+        <Heart size={iconSize} className={wishlisted ? 'fill-current' : ''} />
       </motion.span>
     </motion.button>
   );

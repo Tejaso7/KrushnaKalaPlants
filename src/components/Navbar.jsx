@@ -44,8 +44,8 @@ const Navbar = ({ dark, setDark }) => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-2xl font-extrabold tracking-tight flex items-center gap-2 hover:scale-105 transition-transform">
-          <img src="/logo.png" alt="Krushnakala Logo" className="h-10 w-10 rounded-full object-cover" />
-          <span className="bg-gradient-to-r from-white to-accent-light bg-clip-text text-transparent">Krushnakala</span>
+          <img src="/logo.png" alt="KrishnaKala Plants Logo" className="h-10 w-10 rounded-full object-cover" />
+          <span className="bg-gradient-to-r from-white to-accent-light bg-clip-text text-transparent">KrishnaKala Plants</span>
         </Link>
 
         {/* Desktop nav */}

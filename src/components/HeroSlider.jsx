@@ -7,7 +7,8 @@ import { Leaf, Apple, LeafyGreen, Users, ChevronLeft, ChevronRight, ArrowRight }
 
 const slides = [
   {
-    title: 'Krushnakala Hi-Tech Nursery',
+    title: 'KrishnaKala Plants',
+
     subtitle: 'Govt. Approved — Premium Plants at Wholesale Rates',
     cta: 'Shop Now',
     link: '/products',

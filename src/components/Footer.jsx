@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="bg-gradient-to-r from-primary to-accent py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold mb-2 flex items-center justify-center gap-2">
-            <Leaf size={28} /> Join the Krushnakala Family
+            <Leaf size={28} /> Join the KrishnaKala Plants Family
           </h3>
           <p className="text-accent-light/80 mb-6">Get wholesale rates, seasonal updates, and new plant availability alerts.</p>
           {subscribed ? (
@@ -50,10 +50,10 @@ const Footer = () => {
         {/* Brand */}
         <div className="md:col-span-1">
           <h3 className="text-2xl font-extrabold mb-3 flex items-center gap-2">
-            <img src="/logo.png" alt="Krushnakala Logo" className="h-10 w-10 rounded-full object-cover" /> Krushnakala
+            <img src="/logo.png" alt="KrishnaKala Plants Logo" className="h-10 w-10 rounded-full object-cover" /> KrishnaKala Plants
           </h3>
           <p className="text-sm text-accent-light/80 leading-relaxed">
-            Krushnakala Hi-Tech Nursery (Govt. Approved) — Premium wholesale nursery supplying fruit plants, vegetable seedlings, spice crops & ornamental plants across Maharashtra.
+            KrishnaKala Plants (Govt. Approved) — Premium wholesale nursery supplying fruit plants, vegetable seedlings, spice crops & ornamental plants across Maharashtra.
           </p>
           {/* Social icons */}
           <div className="flex gap-3 mt-4">
@@ -112,7 +112,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="border-t border-white/10 text-center py-5 text-xs text-accent-light/60">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} Krushnakala Hi-Tech Nursery. All rights reserved. (Govt. Approved)</span>
+          <span>&copy; {new Date().getFullYear()} KrishnaKala Plants. All rights reserved. (Govt. Approved)</span>
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition">Privacy Policy</a>
             <a href="#" className="hover:text-white transition">Terms of Service</a>
