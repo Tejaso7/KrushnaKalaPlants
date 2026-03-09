@@ -1,5 +1,5 @@
 // pages/Home.jsx
-// Premium landing page with hero slider, flash sale, categories, testimonials, and CTAs
+// Professional landing page
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -9,35 +9,34 @@ import RecentlyViewed from '../components/RecentlyViewed';
 import API from '../services/api';
 import ProductCard from '../components/ProductCard';
 import { ProductCardSkeleton } from '../components/Skeleton';
-import { Apple, LeafyGreen, Flame, Flower2, Palmtree, Wheat, Heart, Sprout, Building2, Star, ShieldCheck, Truck, Users, Phone, RefreshCw, ArrowRight } from 'lucide-react';
+import { Apple, LeafyGreen, Flame, Flower2, Palmtree, Wheat, Heart, Sprout, Building2, Star, ShieldCheck, Truck, Users, Phone, RefreshCw, ArrowRight, Quote } from 'lucide-react';
 
 const categories = [
-  { name: 'Fruit Plants', icon: <Apple size={40} />, desc: 'Alphonso Mango, Kesar Mango, Guava, Pomegranate & more', color: 'from-orange-400 to-orange-600' },
-  { name: 'Vegetable Plants', icon: <LeafyGreen size={40} />, desc: 'Tomato, Brinjal, Cabbage, Cauliflower & Chili seedlings', color: 'from-green-400 to-green-600' },
-  { name: 'Spice Plants', icon: <Flame size={40} />, desc: 'Ginger, Curry Leaf, Mirchi & aromatic spice crops', color: 'from-red-400 to-red-600' },
-  { name: 'Flowering & Ornamental', icon: <Flower2 size={40} />, desc: 'Beautiful flowering & decorative plants for gardens', color: 'from-pink-400 to-pink-600' },
-  { name: 'Plantation Crops', icon: <Palmtree size={40} />, desc: 'Coconut, Date Palm, Sugarcane & large-scale farming', color: 'from-emerald-400 to-emerald-600' },
-  { name: 'Other Crops', icon: <Wheat size={40} />, desc: 'Khirni, Chikoo, Dragon Fruit & specialty plants', color: 'from-amber-400 to-amber-600' },
+  { name: 'Fruit Plants', icon: <Apple size={28} />, desc: 'Mango, Guava, Pomegranate & more', color: 'bg-orange-50 text-orange-600' },
+  { name: 'Vegetable Plants', icon: <LeafyGreen size={28} />, desc: 'Tomato, Brinjal, Cabbage seedlings', color: 'bg-green-50 text-green-600' },
+  { name: 'Spice Plants', icon: <Flame size={28} />, desc: 'Ginger, Curry Leaf & Mirchi', color: 'bg-red-50 text-red-600' },
+  { name: 'Flowering & Ornamental', icon: <Flower2 size={28} />, desc: 'Roses, Jasmine & decorative plants', color: 'bg-pink-50 text-pink-600' },
+  { name: 'Plantation Crops', icon: <Palmtree size={28} />, desc: 'Coconut, Date Palm & more', color: 'bg-emerald-50 text-emerald-600' },
+  { name: 'Other Crops', icon: <Wheat size={28} />, desc: 'Dragon Fruit, Chikoo & specialty', color: 'bg-amber-50 text-amber-600' },
 ];
 
 const testimonials = [
-  { name: 'Rajesh P.', text: 'Bought 500 Alphonso mango saplings from KrishnaKala Plants. Excellent quality, all plants survived transplanting. Best wholesale nursery in Solapur district!', rating: 5 },
-  { name: 'Sunita D.', text: 'Their pomegranate and guava plants are top-notch. Government approved nursery so you get guaranteed quality. Highly recommended for farmers.', rating: 5 },
-  { name: 'Manoj K.', text: 'Great collection of vegetable seedlings. Tomato and brinjal plants were healthy and started fruiting quickly. Will order again for next season.', rating: 4 },
+  { name: 'Rajesh P.', text: 'Bought 500 Alphonso mango saplings from KrishnaKala Plants. Excellent quality, all plants survived transplanting. Best wholesale nursery in Solapur district!', rating: 5, location: 'Solapur' },
+  { name: 'Sunita D.', text: 'Their pomegranate and guava plants are top-notch. Government approved nursery so you get guaranteed quality. Highly recommended for farmers.', rating: 5, location: 'Pune' },
+  { name: 'Manoj K.', text: 'Great collection of vegetable seedlings. Tomato and brinjal plants were healthy and started fruiting quickly. Will order again for next season.', rating: 4, location: 'Sangli' },
 ];
 
 const stats = [
-  { label: 'Happy Farmers', value: '10,000+', icon: <Heart size={28} className="text-primary" /> },
-  { label: 'Plants Delivered', value: '5,00,000+', icon: <Sprout size={28} className="text-primary" /> },
-  { label: 'Districts Served', value: '30+', icon: <Building2 size={28} className="text-primary" /> },
-  { label: 'Years Experience', value: '15+', icon: <Star size={28} className="text-primary" /> },
+  { label: 'Happy Farmers', value: '10,000+', icon: <Heart size={22} /> },
+  { label: 'Plants Delivered', value: '5,00,000+', icon: <Sprout size={22} /> },
+  { label: 'Districts Served', value: '30+', icon: <Building2 size={22} /> },
+  { label: 'Years Experience', value: '15+', icon: <Star size={22} /> },
 ];
 
 const Home = () => {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch some products for "Featured" section
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
@@ -52,108 +51,115 @@ const Home = () => {
     fetchFeatured();
   }, []);
 
-  // Stagger animation variants
-  const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-  const item = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } };
-
   return (
     <div>
-      {/* Hero Slider */}
       <HeroSlider />
 
-      {/* Stats Bar */}
-      <section className="bg-bg-card shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* Trust / Stats Bar */}
+      <section className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center"
+              transition={{ delay: i * 0.08 }}
+              className="flex items-center gap-3 justify-center md:justify-start"
             >
-              <div className="flex justify-center mb-2">{s.icon}</div>
-              <p className="text-2xl md:text-3xl font-extrabold text-primary-dark mt-1">{s.value}</p>
-              <p className="text-xs text-text-light uppercase tracking-wider mt-1">{s.label}</p>
+              <div className="w-10 h-10 rounded-lg bg-primary/8 text-primary flex items-center justify-center flex-shrink-0">{s.icon}</div>
+              <div>
+                <p className="text-lg md:text-xl font-bold text-text leading-none">{s.value}</p>
+                <p className="text-xs text-text-muted mt-0.5">{s.label}</p>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Categories Section */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-primary-dark text-center mb-3">Shop by Category</h2>
-          <p className="text-text-light text-center mb-10">Premium nursery plants at wholesale rates for farmers & gardeners</p>
-        </motion.div>
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-3 gap-5">
+      <section className="max-w-7xl mx-auto px-4 py-14">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-text section-title">Shop by Category</h2>
+          <p className="text-text-light text-sm mt-4">Browse our wide selection of nursery plants</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {categories.map((cat, i) => (
-            <motion.div key={cat.name} variants={item}>
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+            >
               <Link
                 to={`/products?category=${encodeURIComponent(cat.name)}`}
-                className="group bg-bg-card rounded-2xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className="group bg-bg-card border border-border rounded-xl p-5 flex flex-col items-center text-center hover:border-primary/30 hover:shadow-md transition-all duration-200"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${cat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-                <div className="mb-3 text-primary group-hover:scale-110 transition-transform duration-300">{cat.icon}</div>
-                <h3 className="font-bold text-primary-dark text-lg">{cat.name}</h3>
-                <p className="text-text-light text-sm mt-1">{cat.desc}</p>
+                <div className={`w-14 h-14 rounded-xl ${cat.color} flex items-center justify-center mb-3 group-hover:scale-105 transition-transform`}>
+                  {cat.icon}
+                </div>
+                <h3 className="font-semibold text-text text-sm leading-snug">{cat.name}</h3>
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Flash Sale */}
       <FlashSale />
 
       {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-primary-dark text-center mb-3">Featured Plants</h2>
-          <p className="text-text-light text-center mb-10">Top picks from our government-approved nursery</p>
-        </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="max-w-7xl mx-auto px-4 py-14">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-text">Featured Plants</h2>
+            <p className="text-text-light text-sm mt-1">Top picks from our government-approved nursery</p>
+          </div>
+          <Link to="/products" className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-light transition">
+            View All <ArrowRight size={15} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
           {loading
             ? [...Array(4)].map((_, i) => <ProductCardSkeleton key={i} />)
             : featured.map((product, i) => <ProductCard key={product._id} product={product} index={i} />)
           }
         </div>
-        {featured.length > 0 && (
-          <div className="text-center mt-8">
-            <Link to="/products" className="inline-flex items-center gap-2 bg-primary text-white font-bold px-10 py-3 rounded-full hover:bg-primary-light transition-all shadow-lg hover:shadow-xl hover:scale-105">
-              View All Plants <ArrowRight size={18} />
-            </Link>
-          </div>
-        )}
+        <div className="text-center mt-8 md:hidden">
+          <Link to="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+            View All Plants <ArrowRight size={15} />
+          </Link>
+        </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-primary-dark text-white py-20 px-4">
+      <section className="bg-bg-warm py-14 px-4">
         <div className="max-w-6xl mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold text-center mb-12">
-            Why Choose KrishnaKala Plants?
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-text section-title">Why Choose KrishnaKala Plants?</h2>
+            <p className="text-text-light text-sm mt-4">Trusted by over 10,000 farmers across Maharashtra</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: <ShieldCheck size={36} />, title: 'Govt. Approved Nursery', desc: 'Government certified hi-tech nursery ensuring quality, authenticity and healthy plants.' },
-              { icon: <Sprout size={36} />, title: 'Wholesale Rates', desc: 'Buy directly from the nursery at best wholesale prices. Bulk orders welcome for farmers.' },
-              { icon: <Truck size={36} />, title: 'Pan-Maharashtra Delivery', desc: 'We deliver across Maharashtra. Safe packaging ensuring plants reach you in perfect condition.' },
-              { icon: <Users size={36} />, title: '15+ Years Experience', desc: 'Run by experienced horticulturists with deep knowledge of plant cultivation and care.' },
-              { icon: <Phone size={36} />, title: 'Expert Guidance', desc: 'Free consultation on plant selection, planting techniques and crop management.' },
-              { icon: <RefreshCw size={36} />, title: 'Healthy Plant Guarantee', desc: 'All plants are quality-checked. Replacement guaranteed for any damaged plants on delivery.' },
+              { icon: <ShieldCheck size={24} />, title: 'Govt. Approved Nursery', desc: 'Government certified hi-tech nursery ensuring quality, authenticity and healthy plants.' },
+              { icon: <Sprout size={24} />, title: 'Wholesale Rates', desc: 'Buy directly from the nursery at best wholesale prices. Bulk orders welcome for farmers.' },
+              { icon: <Truck size={24} />, title: 'Pan-Maharashtra Delivery', desc: 'We deliver across Maharashtra with safe packaging ensuring plants reach in perfect condition.' },
+              { icon: <Users size={24} />, title: '15+ Years Experience', desc: 'Run by experienced horticulturists with deep knowledge of plant cultivation and care.' },
+              { icon: <Phone size={24} />, title: 'Expert Guidance', desc: 'Free consultation on plant selection, planting techniques and crop management.' },
+              { icon: <RefreshCw size={24} />, title: 'Healthy Plant Guarantee', desc: 'All plants are quality-checked. Replacement guaranteed for any damaged plants on delivery.' },
             ].map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/10 transition-all"
+                transition={{ delay: i * 0.06 }}
+                className="bg-bg-card border border-border rounded-xl p-5 hover:border-primary/20 hover:shadow-sm transition-all"
               >
-                <div className="text-accent-light">{f.icon}</div>
-                <h4 className="font-bold mt-3 text-lg">{f.title}</h4>
-                <p className="text-accent-light/80 text-sm mt-2 leading-relaxed">{f.desc}</p>
+                <div className="w-10 h-10 rounded-lg bg-primary/8 text-primary flex items-center justify-center">{f.icon}</div>
+                <h4 className="font-semibold mt-3 text-text">{f.title}</h4>
+                <p className="text-text-light text-sm mt-1.5 leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -161,47 +167,50 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
-        <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold text-primary-dark text-center mb-12">
-          What Our Customers Say
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="max-w-6xl mx-auto px-4 py-14">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-text section-title">What Our Customers Say</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-bg-card rounded-2xl shadow-md p-6 relative"
+              transition={{ delay: i * 0.1 }}
+              className="bg-bg-card border border-border rounded-xl p-6 relative"
             >
-              <div className="flex gap-0.5 mb-2">
+              <Quote size={20} className="text-primary/15 mb-3" />
+              <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} size={16} className={j < t.rating ? 'text-gold fill-gold' : 'text-gray-300'} />
+                  <Star key={j} size={14} className={j < t.rating ? 'text-gold fill-gold' : 'text-gray-200'} />
                 ))}
               </div>
-              <p className="text-text-light text-sm leading-relaxed italic">"{t.text}"</p>
-              <p className="mt-4 font-bold text-primary-dark">— {t.name}</p>
+              <p className="text-text-light text-sm leading-relaxed">"{t.text}"</p>
+              <div className="mt-4 pt-3 border-t border-border">
+                <p className="font-semibold text-text text-sm">{t.name}</p>
+                <p className="text-text-muted text-xs">{t.location}</p>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Recently Viewed */}
       <RecentlyViewed />
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary via-primary-light to-accent py-20 px-4 text-white text-center">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Ready to Grow?</h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-            Join 10,000+ happy farmers. Order premium nursery plants at wholesale rates from KrishnaKala Plants.
+      <section className="bg-primary py-16 px-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-3">Ready to Grow?</h2>
+          <p className="text-white/70 mb-8 max-w-xl mx-auto">
+            Join 10,000+ happy farmers. Get premium nursery plants at wholesale rates delivered to your doorstep.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/products" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold px-10 py-4 rounded-full text-lg hover:bg-accent-light hover:text-white transition-all shadow-xl hover:scale-105">
-              Shop Now <ArrowRight size={18} />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/products" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-semibold px-7 py-3 rounded-lg text-sm hover:bg-accent-light hover:text-white transition-all">
+              Shop Now <ArrowRight size={15} />
             </Link>
-            <Link to="/register" className="border-2 border-white text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-white hover:text-primary transition-all">
+            <Link to="/register" className="inline-flex items-center justify-center gap-2 border border-white/30 text-white font-medium px-7 py-3 rounded-lg text-sm hover:bg-white/10 transition-all">
               Create Account
             </Link>
           </div>
